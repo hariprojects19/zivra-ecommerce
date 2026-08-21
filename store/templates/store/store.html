@@ -1,0 +1,134 @@
+{% extends "./base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+
+.hero-banner{
+
+    background-image: url("{% static 'media/images/banner2.webp' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    height: 550px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.hero-content{
+
+    background: rgba(255,255,255,0.75);
+    padding: 40px;
+    border-radius: 12px;
+
+}
+
+.hero-content h1{
+
+    font-size: 3rem;
+    font-weight: bold;
+    color: #2c3e50;
+
+}
+
+.hero-content p{
+
+    font-size: 1.4rem;
+    color: #555;
+    margin-top: 15px;
+    margin-bottom: 25px;
+
+}
+
+</style>
+
+
+<!-- Hero Banner Section -->
+
+<section class="hero-banner">
+
+    <div class="hero-content">
+
+        <h1>Zivra - Find it. Love it. Own it</h1>
+
+        <p>Explore the Finest Collections</p>
+
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg">
+
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            &nbsp; Create an account
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- All Products Section -->
+
+<div class="album py-5 bg-light">
+
+    <div class="container">
+
+        <div class="pb-3 h5">
+            All Products
+        </div>
+
+        <hr>
+
+        <br>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
+
+            {% for product in my_products %}
+
+            <div class="col">
+
+                <div class="card shadow-sm">
+
+                    <img class="img-fluid"
+                         alt="Responsive image"
+                         src="{{ product.image.url }}">
+
+                    <div class="card-body">
+
+                        <p class="card-text">
+
+                            <a class="text-info text-decoration-none"
+                               href="{{ product.get_absolute_url }}">
+
+                                {{ product.title|capfirst }}
+
+                            </a>
+
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h5>$ {{ product.price }}</h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
